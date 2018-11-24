@@ -17,12 +17,12 @@ import br.com.hubfintech.projeto.service.PessoaService;
 public class PessoaResource {
 
 		@Autowired
-		private PessoaService pessoaService;
+		private PessoaService service;
 		
 		@RequestMapping(method=RequestMethod.GET, path="/consultarVendaCliente", consumes = "application/json", produces = "application/json")
 	    public ResponseEntity<?> consultarVendaCliente(@RequestParam(name="id") Long id) {
 			try {
-				PessoaDTO pessoa= pessoaService.findById(id);
+				PessoaDTO pessoa= service.findById(id);
 				
 				if(pessoa != null) {
 			    	return new ResponseEntity<PessoaDTO>(pessoa,HttpStatus.OK);
