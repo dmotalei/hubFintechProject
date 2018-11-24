@@ -35,7 +35,7 @@ public class Pessoa implements Serializable {
 	@Column(name="RAZAO_SOCIAL", length=200)
 	private String razaoSocial;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="DATA_NASCIMENTO", length=200)
 	private Date dataNascimento;
 
