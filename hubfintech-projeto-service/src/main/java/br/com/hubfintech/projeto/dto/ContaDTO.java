@@ -1,48 +1,25 @@
-package br.com.hubfintech.projeto.entity;
+package br.com.hubfintech.projeto.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="TB_CONTA", schema="DB_PROJETO")
-public class Conta implements Serializable {
+public class ContaDTO implements Serializable {
  
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID")
 	private Long id;
 	
-	@Column(name="NUMERO_CONTA", nullable=false, length=10)
 	private String numeroConta;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_PESSOA", referencedColumnName="ID")
-	private Pessoa pessoa;
+	private PessoaDTO pessoa;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_STATUS_CONTA", referencedColumnName="ID")
-	private StatusConta statusConta;
+	private StatusContaDTO statusConta;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_CONTA_PAI", referencedColumnName="ID")
-	private Conta contaPai;
+	private ContaDTO contaPai;
 	
-	@Column(name="SALDO")
 	private BigDecimal saldo;
 
 	public Long getId() {
@@ -53,27 +30,27 @@ public class Conta implements Serializable {
 		this.id = id;
 	}
 
-	public Pessoa getPessoa() {
+	public PessoaDTO getPessoa() {
 		return pessoa;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
+	public void setPessoa(PessoaDTO pessoa) {
 		this.pessoa = pessoa;
 	}
 
-	public StatusConta getStatusConta() {
+	public StatusContaDTO getStatusConta() {
 		return statusConta;
 	}
 
-	public void setStatusConta(StatusConta statusConta) {
+	public void setStatusConta(StatusContaDTO statusConta) {
 		this.statusConta = statusConta;
 	}
 
-	public Conta getContaPai() {
+	public ContaDTO getContaPai() {
 		return contaPai;
 	}
 
-	public void setContaPai(Conta contaPai) {
+	public void setContaPai(ContaDTO contaPai) {
 		this.contaPai = contaPai;
 	}
 
@@ -114,7 +91,7 @@ public class Conta implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Conta other = (Conta) obj;
+		ContaDTO other = (ContaDTO) obj;
 		if (contaPai == null) {
 			if (other.contaPai != null)
 				return false;

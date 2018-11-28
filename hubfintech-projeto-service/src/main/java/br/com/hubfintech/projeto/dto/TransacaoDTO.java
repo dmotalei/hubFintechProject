@@ -1,58 +1,27 @@
-package br.com.hubfintech.projeto.entity;
+package br.com.hubfintech.projeto.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-@Entity
-@Table(name="TB_TRANSACAO", schema="DB_PROJETO")
-public class Transacao implements Serializable {
+public class TransacaoDTO implements Serializable {
  
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID")
 	private Long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_CONTA_DESTINO", referencedColumnName="ID", nullable=false)
-	private Conta contaDestino;
+	private ContaDTO contaDestino;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_CONTA_REMETENTE", referencedColumnName="ID")
-	private Conta contaRemetente;
+	private ContaDTO contaRemetente;
 	
-	@Column(name="VALOR")
 	private BigDecimal valor;
 	
-	@Column(name="DATA_TRANSACAO")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataTransacao;
 	
-	@Column(name="DATA_ESTORNO")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataEstorno;
 
-	@Column(name="FLAG_APORTE")
 	private Boolean flagAporte;
 	
-	@Column(name="CODIGO_ESTORNO_APORTE")
 	private String codigoEstornoAporte;
 
 	public Long getId() {
@@ -63,28 +32,20 @@ public class Transacao implements Serializable {
 		this.id = id;
 	}
 
-	public Conta getContaDestino() {
+	public ContaDTO getContaDestino() {
 		return contaDestino;
 	}
 
-	public void setContaDestino(Conta contaDestino) {
+	public void setContaDestino(ContaDTO contaDestino) {
 		this.contaDestino = contaDestino;
 	}
 
-	public Conta getContaRemetente() {
+	public ContaDTO getContaRemetente() {
 		return contaRemetente;
 	}
 
-	public void setContaRemetente(Conta contaRemetente) {
+	public void setContaRemetente(ContaDTO contaRemetente) {
 		this.contaRemetente = contaRemetente;
-	}
-
-	public String getCodigoEstornoAporte() {
-		return codigoEstornoAporte;
-	}
-
-	public void setCodigoEstornoAporte(String codigoEstornoAporte) {
-		this.codigoEstornoAporte = codigoEstornoAporte;
 	}
 
 	public BigDecimal getValor() {
@@ -103,7 +64,6 @@ public class Transacao implements Serializable {
 		this.dataTransacao = dataTransacao;
 	}
 
-
 	public Date getDataEstorno() {
 		return dataEstorno;
 	}
@@ -118,6 +78,14 @@ public class Transacao implements Serializable {
 
 	public void setFlagAporte(Boolean flagAporte) {
 		this.flagAporte = flagAporte;
+	}
+
+	public String getCodigoEstornoAporte() {
+		return codigoEstornoAporte;
+	}
+
+	public void setCodigoEstornoAporte(String codigoEstornoAporte) {
+		this.codigoEstornoAporte = codigoEstornoAporte;
 	}
 
 	@Override
@@ -143,7 +111,7 @@ public class Transacao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Transacao other = (Transacao) obj;
+		TransacaoDTO other = (TransacaoDTO) obj;
 		if (codigoEstornoAporte == null) {
 			if (other.codigoEstornoAporte != null)
 				return false;
@@ -189,7 +157,7 @@ public class Transacao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Transacao [id=" + id + ", contaDestino=" + contaDestino + ", contaRemetente=" + contaRemetente
+		return "TransacaoDTO [id=" + id + ", contaDestino=" + contaDestino + ", contaRemetente=" + contaRemetente
 				+ ", valor=" + valor + ", dataTransacao=" + dataTransacao + ", dataEstorno=" + dataEstorno
 				+ ", flagAporte=" + flagAporte + ", codigoEstornoAporte=" + codigoEstornoAporte + "]";
 	}
