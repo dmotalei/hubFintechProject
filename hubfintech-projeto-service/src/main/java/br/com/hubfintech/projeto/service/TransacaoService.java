@@ -112,7 +112,7 @@ public class TransacaoService {
 
 			repository.save(transacao);
 			contaService.saveAll(contas);
-
+			
 		} catch (ServiceException e) {
 			throw e;
 		} catch (Exception e) {

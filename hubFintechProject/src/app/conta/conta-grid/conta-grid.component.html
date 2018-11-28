@@ -16,17 +16,19 @@
           
           <th>Conta</th>
           <th>Cpf/Cnpj</th>
+          <th>Saldo</th>
           <th>Conta Pai</th>
           <th>Editar</th>
       </tr>
     </thead>
     <tbody>
         <tr class="no-data-available" *ngIf="(paginaMostrando.contas.length === 0 && !paginaMostrando.loading)">
-            <td colspan="4">Sem registros</td>
+            <td colspan="5">Sem registros</td>
         </tr>
         <tr *ngFor="let conta of paginaMostrando.contas">
           <td>{{conta.numeroConta}}</td>
           <td>{{conta.pessoa.cpfCnpj}}</td>
+          <td>{{conta.saldo}}</td>
           <td><div *ngIf="conta.contaPai">{{conta.contaPai.numeroConta}}</div> </td>
           <td> <button (click)="editar(conta)" class="btn btn-outline-primary" >Editar</button></td>
         </tr>
