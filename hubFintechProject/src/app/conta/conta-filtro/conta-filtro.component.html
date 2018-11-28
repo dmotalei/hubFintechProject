@@ -1,0 +1,18 @@
+<form (submit)="search()">
+    <div class="form-group">
+      <div class="row">
+          <div class="col-md-10">
+              <div class="row">
+                <label class="col-md-2" for="numeroContaSearch">Nome:</label>
+                <input id="numeroContaSearch" name="numeroContaSearch" [(ngModel)]="numeroConta" class="form-control col-md-4"  type="search" placeholder="Busque contas por Número Conta...">
+              </div>
+          </div>  
+        </div> 
+        <div class="row">
+          <button class="btn btn-primary ml-2 mt-1" type="submit">Pesquisar</button>
+          <button class="btn btn-primary ml-2 mt-1" type="button" (click)="openModal()">Novo</button>
+        </div>    
+    </div>
+   
+    <app-modal-conta></app-modal-conta>
+  </form>

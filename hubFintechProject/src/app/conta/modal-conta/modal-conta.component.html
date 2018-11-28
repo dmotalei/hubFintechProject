@@ -1,0 +1,47 @@
+<div class="modal" [ngClass]="{'showModal': exibir}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cadastrar Pessoa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <div *ngIf="conta" class="row">
+          <div class="col-md-12 mt-2">
+            <label class="col-md-4 float-left mt-2" for="numeroConta">Número Conta:</label>
+            <input id="numeroConta" name="numeroConta" [(ngModel)]="conta.numeroConta" [disabled]="conta.id != null && conta.id > 0" class="form-control col-md-6 float-left"  type="text">
+          </div>
+          <div class="col-md-12 mt-2">
+            <label class="col-md-4 float-left mt-2" for="status">Status:</label>
+            <select name="status" class="selectpicker form-control col-md-6 float-left" [(ngModel)]="status" >
+              <option value="-1">Selecione</option>
+              <option *ngFor="let status of statusList" value="{{status.id}}">{{status.nome}}</option>
+            </select>
+          </div>
+          <div class="col-md-12 mt-2">
+            <label class="col-md-4 float-left mt-2" for="pessoa">CPF/CNPJ:</label>
+            <input id="pessoa" name="pessoa" [(ngModel)]="pessoa" class="form-control col-md-6 float-left"  type="text" placeholder="Digite o Cpf/Cnpj"/>
+          </div>
+          <div class="col-md-12 mt-2">
+            <label class="col-md-4 float-left mt-2" for="contaPai">Conta Pai:</label>
+            <input id="contaPai" name="contaPai" [(ngModel)]="contaPai" class="form-control col-md-6 float-left"  type="text" placeholder="Digite o numero da conta pai"/>
+          </div>
+         
+        </div>
+        
+        <div *ngIf="error">
+            <p>Ocorrreu um erro: </p>
+            <pre>{{error}}</pre>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"  (click)="salvar()" >Salvar</button>
+        <button type="button" (click)="closeModal()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

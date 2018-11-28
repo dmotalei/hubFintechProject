@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+.panelFiltro{
+    background-color:  #f0f2f5;
+ } 
+
+.no-data-available {
+  text-align: center;
+}
+  
+.showModal{
+  display: block;
+}

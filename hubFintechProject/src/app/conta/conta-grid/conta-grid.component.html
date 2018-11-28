@@ -1,0 +1,58 @@
+<div *ngIf="paginaMostrando.loading" class="d-flex justify-content-center">
+  <app-loading></app-loading>
+</div>
+
+<div *ngIf="paginaMostrando.error">
+  <p>Ocorrreu um erro: </p>
+  <pre>{{paginaMostrando.error | json}}</pre>
+</div>
+
+
+<div class="container">
+
+  <table id="example" class="table table-bordered table-striped" style="width:100%">
+    <thead>
+      <tr>
+          
+          <th>Conta</th>
+          <th>Cpf/Cnpj</th>
+          <th>Conta Pai</th>
+          <th>Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="no-data-available" *ngIf="(paginaMostrando.contas.length === 0 && !paginaMostrando.loading)">
+            <td colspan="4">Sem registros</td>
+        </tr>
+        <tr *ngFor="let conta of paginaMostrando.contas">
+          <td>{{conta.numeroConta}}</td>
+          <td>{{conta.pessoa.cpfCnpj}}</td>
+          <td><div *ngIf="conta.contaPai">{{conta.contaPai.numeroConta}}</div> </td>
+          <td> <button (click)="editar(conta)" class="btn btn-outline-primary" >Editar</button></td>
+        </tr>
+    </tbody>
+  </table>
+  <div *ngIf="paginaMostrando.contas.length > 0" class="float-right">
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" [ngClass]="{'disabled': paginaMostrando.paginacaoConta.paginacao.paginaAtual === 1}">
+               <a class="page-link" (click)="avancarPagina(0)">Primeira</a>
+            </li>
+            <li class="page-item" *ngIf="paginaMostrando.paginacaoConta.paginacao.paginaAtual > 1">
+                <a class="page-link" (click)="avancarPagina(paginaMostrando.paginacaoConta.paginacao.paginaAtual-2)">{{paginaMostrando.paginacaoConta.paginacao.paginaAtual - 1}}</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link">{{paginaMostrando.paginacaoConta.paginacao.paginaAtual}}</a>
+            </li>
+            <li class="page-item" *ngIf="paginaMostrando.paginacaoConta.paginacao.paginaAtual != paginaMostrando.paginacaoConta.paginacao.quantidadePaginas">
+                <a class="page-link" (click)="avancarPagina(paginaMostrando.paginacaoConta.paginacao.paginaAtual)">{{paginaMostrando.paginacaoConta.paginacao.paginaAtual + 1}}</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': paginaMostrando.paginacaoConta.paginacao.paginaAtual === paginaMostrando.paginacaoConta.paginacao.quantidadePaginas}">
+                <a class="page-link" (click)="avancarPagina(paginaMostrando.paginacaoConta.paginacao.quantidadePaginas-1)">Última</a>
+            </li>
+          </ul>
+        </nav>
+  </div>
+
+  
+</div>

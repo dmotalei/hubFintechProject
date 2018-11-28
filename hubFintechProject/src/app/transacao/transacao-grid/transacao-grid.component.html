@@ -1,0 +1,64 @@
+<div *ngIf="paginaMostrando.loading" class="d-flex justify-content-center">
+  <app-loading></app-loading>
+</div>
+
+<div *ngIf="paginaMostrando.error">
+  <p>Ocorrreu um erro: </p>
+  <pre>{{paginaMostrando.error | json}}</pre>
+</div>
+
+
+<div class="container">
+
+  <table id="example" class="table table-bordered table-striped" style="width:100%">
+    <thead>
+      <tr>
+          
+          <th>Transação</th>
+          <th>Tipo</th>
+          <th>Conta Destino</th>
+          <th>Conta Remetente</th>
+          <th>Data Transação</th>
+          <th>Valor</th>
+          <th>Estornar</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="no-data-available" *ngIf="(paginaMostrando.transacoes.length === 0 && !paginaMostrando.loading)">
+            <td colspan="7">Sem registros</td>
+        </tr>
+        <tr *ngFor="let transacao of paginaMostrando.transacoes">
+          <td>{{transacao.id}}</td>
+          <td><div *ngIf="transacao.flagAporte">Aporte</div><div *ngIf="!transacao.flagAporte">Transferência</div></td>
+          <td><div *ngIf="transacao.contaDestino">{{transacao.contaDestino.numeroConta}}</div></td>
+          <td><div *ngIf="transacao.contaRemetente">{{transacao.contaRemetente.numeroConta}}</div></td>
+          <td>{{transacao.dataTransacao | date }}</td>
+          <td>{{transacao.valor}}</td>
+          <td> <button (click)="estornar(transacao)" class="btn btn-outline-danger" [disabled]="transacao.dataEstorno != null" >Estornar</button></td>
+        </tr>
+    </tbody>
+  </table>
+  <div *ngIf="paginaMostrando.transacoes.length > 0" class="float-right">
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" [ngClass]="{'disabled': paginaMostrando.paginacaoTransacao.paginacao.paginaAtual === 1}">
+               <a class="page-link" (click)="avancarPagina(0)">Primeira</a>
+            </li>
+            <li class="page-item" *ngIf="paginaMostrando.paginacaoTransacao.paginacao.paginaAtual > 1">
+                <a class="page-link" (click)="avancarPagina(paginaMostrando.paginacaoTransacao.paginacao.paginaAtual-2)">{{paginaMostrando.paginacaoTransacao.paginacao.paginaAtual - 1}}</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link">{{paginaMostrando.paginacaoTransacao.paginacao.paginaAtual}}</a>
+            </li>
+            <li class="page-item" *ngIf="paginaMostrando.paginacaoTransacao.paginacao.paginaAtual != paginaMostrando.paginacaoTransacao.paginacao.quantidadePaginas">
+                <a class="page-link" (click)="avancarPagina(paginaMostrando.paginacaoTransacao.paginacao.paginaAtual)">{{paginaMostrando.paginacaoTransacao.paginacao.paginaAtual + 1}}</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': paginaMostrando.paginacaoTransacao.paginacao.paginaAtual === paginaMostrando.paginacaoTransacao.paginacao.quantidadePaginas}">
+                <a class="page-link" (click)="avancarPagina(paginaMostrando.paginacaoTransacao.paginacao.quantidadePaginas-1)">Última</a>
+            </li>
+          </ul>
+        </nav>
+  </div>
+
+  
+</div>

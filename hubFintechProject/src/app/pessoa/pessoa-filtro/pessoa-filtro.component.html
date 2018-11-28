@@ -1,0 +1,18 @@
+<form (submit)="search()">
+  <div class="form-group">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+              <label class="col-md-2" for="cpfCnpjSearch">CPF/CNPJ:</label>
+              <input id="cpfCnpjSearch" name="cpfCnpjSearch" [(ngModel)]="cpfCnpj" class="form-control col-md-4"  type="search" placeholder="Busque pessoas por CPF/CNPJ ...">
+            </div>
+        </div>  
+      </div> 
+      <div class="row">
+        <button class="btn btn-primary ml-2 mt-1" type="submit">Pesquisar</button>
+        <button class="btn btn-primary ml-2 mt-1" type="button" (click)="openModal()">Novo</button>
+      </div>    
+  </div>
+ 
+  <app-modal-pessoa></app-modal-pessoa>
+</form>
